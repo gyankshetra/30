@@ -1,0 +1,110 @@
+<!DOCTYPE html><html lang="hi"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Physics Force Motion SET 1 - 30Q</title>
+<style>
+body{margin:0;background:#e4f3e0;font-family:system-ui}
+.top{display:flex;justify-content:space-between;padding:14px 16px}
+.logo{font-weight:800;color:#166534;font-size:20px}
+.card{margin:0 14px;background:#fff;border-radius:18px;padding:16px;border:1.5px solid #a3c99d}
+.badge{display:inline-flex;background:#166534;color:#fff;padding:5px 12px;border-radius:20px;font-size:12px;font-weight:800}
+.h1{color:#155e2e;font-size:22px;font-weight:800;margin:10px 0 4px}
+.sub{font-size:12px;color:#555}
+.boxes{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:14px}
+.box{background:#eaf6e5;border:1.5px solid #b9d8b3;border-radius:14px;padding:10px 6px;text-align:center}
+.box b{font-size:13px;color:#14532d;display:block}.box span{font-size:10px}
+.ul{margin:10px 0 0 16px;font-size:14px;line-height:1.6}
+.note{background:#fef3c7;border:1px solid #fcd34d;padding:10px 12px;border-radius:12px;margin:12px 14px;font-size:13px}
+.footer-card{margin:12px 14px 20px;background:#fff;border-radius:18px;padding:14px;border:1.5px solid #a3c99d}
+.inp{width:100%;box-sizing:border-box;padding:13px;border-radius:12px;border:1.5px solid #a3c99d}
+.btn{width:100%;margin-top:10px;background:#166534;color:#fff;border:none;padding:14px;border-radius:14px;font-weight:800;font-size:16px;cursor:pointer}
+.q-header{display:none;justify-content:space-between;padding:10px 14px;background:#dcfce7;position:sticky;top:0;z-index:5}
+.q-card{background:#fff;margin:12px;border-radius:16px;padding:14px;border:1.5px solid #b7d9b0}
+.opt{border:1.5px solid #cbd5c8;padding:11px;border-radius:10px;margin:7px 0;cursor:pointer}
+.opt.sel{background:#dcfce7;border-color:#166534;font-weight:700}
+#qPopup{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:99;justify-content:center;align-items:flex-end}
+#qPopup.show{display:flex}
+.pbox{background:#fff;width:100%;max-width:420px;border-radius:20px 20px 0 0;padding:16px;max-height:85vh;overflow:auto}
+.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:10px}
+.qn{padding:10px;text-align:center;border-radius:10px;background:#e5e7eb;font-weight:700;cursor:pointer}
+.qn.act{background:#166534;color:#fff}.qn.done{background:#bbf7d0}
+</style></head>
+<body>
+<div id="p-start">
+<div class="top"><div class="logo">📖 Gyankshetra</div><div>👤</div></div>
+<div class="card">
+<div class="badge" id="autoBadge">PHYSICS • SET-1</div>
+<div class="h1" id="autoTitle">Force Motion SET 1</div>
+<div class="sub">Bihar Public Service Commission - Teacher Recruitment</div>
+<div class="boxes">
+<div class="box"><b>30 Questions</b><span>Total MCQs</span></div>
+<div class="box"><b>10 Minutes</b><span>Time Duration</span></div>
+<div class="box"><b>1/3 Negative</b><span>Negative Marking</span></div>
+</div>
+</div>
+<div style="margin:18px 14px"><h3 style="color:#14532d;margin:0">📋 Instructions</h3>
+<ul class="ul">
+<li>सभी प्रश्न बहुविकल्पीय हैं।</li><li>प्रत्येक सही उत्तर पर 1 अंक।</li><li>प्रत्येक 3 गलत पर 1 अंक कटेगा।</li><li>सभी 5 विकल्प में से एक चयन जरूरी है।</li>
+</ul></div>
+<div class="note">नोट: उत्तर नहीं आता तो विकल्प (E) प्रयास नहीं किया चुनें, इस पर नेगेटिव नहीं है।</div>
+<div class="footer-card">
+<label style="font-size:13px;font-weight:800">Candidate Name</label>
+<input id="cName" class="inp" placeholder="Enter your full name...">
+<button class="btn" onclick="startQuiz()">START TEST →</button>
+</div>
+</div>
+
+<div id="p-quiz" style="display:none">
+<div class="q-header" id="qHeader"><span id="qbadge" style="font-weight:800">1/30Q</span><div style="display:flex;gap:8px"><span id="timer" style="font-weight:800;color:#166534">10:00</span><button onclick="openPopup()" style="background:#fff;border:1.5px solid #166534;border-radius:20px;padding:6px 12px;font-weight:800">☰ 30Q</button></div></div>
+<div class="q-card"><div id="qT" style="font-weight:700"></div><div id="opts" style="margin-top:10px"></div></div>
+<div style="display:flex;gap:8px;padding:0 12px"><button onclick="prev()" style="flex:1;padding:12px;border-radius:12px;border:2px solid #166534;background:#fff;font-weight:700">पिछला</button><button onclick="next()" style="flex:1;padding:12px;border-radius:12px;background:#166534;color:#fff;border:none;font-weight:700">अगला →</button></div>
+</div>
+<div id="p-result" style="display:none;padding:12px"><div class="card" style="text-align:center"><h2 id="score"></h2><p id="scoreP"></p></div><button class="btn" onclick="location.reload()">फिर से शुरू</button></div>
+<div id="qPopup" onclick="if(event.target==this)closePopup()"><div class="pbox"><div style="display:flex;justify-content:space-between"><b>प्रश्न सूची</b><span onclick="closePopup()">✕</span></div><div class="grid" id="grid"></div><button onclick="closePopup();showResult()" style="width:100%;margin-top:14px;padding:12px;background:#166534;color:#fff;border:none;border-radius:12px;font-weight:800">Submit करें</button></div></div>
+
+<script>
+let totalQ=30;
+const Q=[
+{q:"बल का SI मात्रक क्या है?",opts:["न्यूटन","जूल","वाट","पास्कल","प्रयास नहीं किया"],ans:0},
+{q:"जड़त्व का नियम किसने दिया?",opts:["न्यूटन","गैलीलियो","आइंस्टीन","केप्लर","प्रयास नहीं किया"],ans:0},
+{q:"F = ma किस नियम से है?",opts:["दूसरा नियम","पहला नियम","तीसरा नियम","गुरुत्वाकर्षण","प्रयास नहीं किया"],ans:0},
+{q:"क्रिया-प्रतिक्रिया किस नियम में?",opts:["तीसरा","पहला","दूसरा","जड़त्व","प्रयास नहीं किया"],ans:0},
+{q:"घर्षण बल किसके विपरीत कार्य करता है?",opts:["गति के","बल के","त्वरण के","द्रव्यमान के","प्रयास नहीं किया"],ans:0},
+{q:"वजन W =?",opts:["mg","ma","mv","m/v","प्रयास नहीं किया"],ans:0},
+{q:"त्वरण का मात्रक?",opts:["m/s²","m/s","N","J","प्रयास नहीं किया"],ans:0},
+{q:"संवेग p =?",opts:["mv","ma","mg","m/v","प्रयास नहीं किया"],ans:0},
+{q:"आवेग =?",opts:["बल×समय","बल/समय","द्रव्यमान×वेग","द्रव्यमान/वेग","प्रयास नहीं किया"],ans:0},
+{q:"मुक्त पतन में त्वरण?",opts:["9.8 m/s²","0","10 N","1 m/s²","प्रयास नहीं किया"],ans:0},
+{q:"स्थैतिक घर्षण > गतिज घर्षण?",opts:["हाँ","नहीं","बराबर","कभी-कभी","प्रयास नहीं किया"],ans:0},
+{q:"बल आघूर्ण का सूत्र?",opts:["r×F","F×t","m×a","p×v","प्रयास नहीं किया"],ans:0},
+{q:"संतुलन में नेट बल?",opts:["0","mg","ma","अनंत","प्रयास नहीं किया"],ans:0},
+{q:"न्यूटन का पहला नियम कहलाता है?",opts:["जड़त्व का नियम","गति का नियम","ऊर्जा नियम","संवेग नियम","प्रयास नहीं किया"],ans:0},
+{q:"द्रव्यमान का SI मात्रक?",opts:["kg","N","J","W","प्रयास नहीं किया"],ans:0},
+{q:"वेग परिवर्तन की दर?",opts:["त्वरण","बल","संवेग","आवेग","प्रयास नहीं किया"],ans:0},
+{q:"घर्षण गुणांक μ की इकाई?",opts:["कोई इकाई नहीं","N","J","m/s","प्रयास नहीं किया"],ans:0},
+{q:"क्रिया और प्रतिक्रिया बल?",opts:["बराबर विपरीत","असमान","एक ही दिशा","शून्य","प्रयास नहीं किया"],ans:0},
+{q:"लिफ्ट ऊपर जाए तो वजन?",opts:["बढ़ता है","घटता है","वही","शून्य","प्रयास नहीं किया"],ans:0},
+{q:"अभिकेन्द्र बल का सूत्र?",opts:["mv²/r","mg","ma","mv","प्रयास नहीं किया"],ans:0},
+{q:"गति के समीकरण v =?",opts:["u+at","u-at","s/t","at","प्रयास नहीं किया"],ans:0},
+{q:"s = ut + ½at² किसके लिए?",opts:["त्वरित गति","समान गति","वृत्तीय गति","घूर्णन","प्रयास नहीं किया"],ans:0},
+{q:"संवेग संरक्षण किसमें?",opts:["टक्कर में","घर्षण में","गुरुत्व में","विद्युत में","प्रयास नहीं किया"],ans:0},
+{q:"बल का आयाम?",opts:["[MLT⁻²]","[MLT⁻¹]","[ML²T⁻²]","[M⁰LT⁻²]","प्रयास नहीं किया"],ans:0},
+{q:"जड़त्व किस पर निर्भर?",opts:["द्रव्यमान पर","वेग पर","बल पर","समय पर","प्रयास नहीं किया"],ans:0},
+{q:"रॉकेट किस नियम पर?",opts:["संवेग संरक्षण+तीसरा नियम","पहला नियम","दूसरा नियम","गुरुत्व","प्रयास नहीं किया"],ans:0},
+{q:"घर्षण कम करने के लिए?",opts:["लुब्रिकेंट","रेत डालना","खुरदरा करना","वजन बढ़ाना","प्रयास नहीं किया"],ans:0},
+{q:"तिरछे तल पर नीचे खिसकने वाला बल?",opts:["mg sinθ","mg cosθ","mg tanθ","mg","प्रयास नहीं किया"],ans:0},
+{q:"वृत्तीय गति में वेग की दिशा?",opts:["स्पर्शरेखीय","त्रिज्यीय","अक्षीय","शून्य","प्रयास नहीं किया"],ans:0},
+{q:"बल की दिशा और त्वरण की दिशा?",opts:["समान","विपरीत","लंबवत","कोई संबंध नहीं","प्रयास नहीं किया"],ans:0}
+];
+let cur=0,selAns=Array(totalQ).fill(null),sec=600,tInt;
+let grid=document.getElementById('grid');Q.forEach((_,i)=>{let d=document.createElement('div');d.className='qn';d.innerText=i+1;d.onclick=()=>{cur=i;showQ();closePopup();};grid.appendChild(d);});
+function openPopup(){document.getElementById('qPopup').classList.add('show');updGrid();}
+function closePopup(){document.getElementById('qPopup').classList.remove('show');}
+function updGrid(){[...grid.children].forEach((e,i)=>{e.className='qn'+(i==cur?' act':'')+(selAns[i]!=null&&i!=cur?' done':'');});}
+function startQuiz(){if(!cName.value){alert('नाम लिखें');return;}document.getElementById('p-start').style.display='none';document.getElementById('p-quiz').style.display='block';document.getElementById('qHeader').style.display='flex';tInt=setInterval(()=>{sec--;let m=Math.floor(sec/60),s=sec%60;timer.innerText=(m<10?'0':'')+m+':'+(s<10?'0':'')+s;if(sec<=0)showResult();},1000);showQ();}
+function showQ(){let qq=Q[cur];qT.innerText=`Q${cur+1}. ${qq.q}`;qbadge.innerText=`${cur+1}/${totalQ}Q`;opts.innerHTML=qq.opts.map((o,i)=>`<div class="opt ${selAns[cur]==i?'sel':''}" onclick="selAns[cur]=${i};showQ()">${String.fromCharCode(65+i)}. ${o}</div>`).join('');updGrid();}
+function next(){if(cur<totalQ-1){cur++;showQ();}else showResult();}
+function prev(){if(cur>0){cur--;showQ();}}
+function showResult(){clearInterval(tInt);document.getElementById('p-quiz').style.display='none';qHeader.style.display='none';document.getElementById('p-result').style.display='block';let c=0,at=0;selAns.forEach((v,i)=>{if(v!=null&&v!=4){at++;if(v==Q[i].ans)c++;}});score.innerText=(c-(at-c)/3).toFixed(2)+'/'+totalQ;scoreP.innerText=`सही: ${c} | गलत: ${at-c} | E/छोड़ा: ${totalQ-at}`;}
+// Auto title from URL
+let path=location.pathname.split('/').filter(Boolean).pop()||'';let sub='PHYSICS';if(path.includes('chem'))sub='CHEMISTRY';document.getElementById('autoBadge').innerText=sub+' • SET-1';
+</script></body></html>
